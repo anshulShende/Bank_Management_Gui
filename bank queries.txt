@@ -1,0 +1,79 @@
+use bankdb;
+Database changed
+mysql> create table transaction(acc_no int primary key,name varchar(30) not null,trans varchar(10) not null,t_amt int not null,balance int not null);
+Query OK, 0 rows affected (0.19 sec)
+
+mysql> desc pdetails;
++--------+-------------+------+-----+---------+----------------+
+| Field  | Type        | Null | Key | Default | Extra          |
++--------+-------------+------+-----+---------+----------------+
+| id     | int(11)     | NO   | PRI | NULL    | auto_increment |
+| name   | varchar(30) | NO   |     | NULL    |                |
+| gender | varchar(10) | YES  |     | NULL    |                |
+| dob    | varchar(15) | YES  |     | NULL    |                |
+| mob    | varchar(20) | NO   | UNI | NULL    |                |
+| email  | varchar(30) | YES  |     | NULL    |                |
+| pass   | varchar(10) | NO   |     | NULL    |                |
+| state  | varchar(20) | YES  |     | NULL    |                |
+| acc_no | int(20)     | NO   |     | 0       |                |
++--------+-------------+------+-----+---------+----------------+
+9 rows in set (0.11 sec)
+
+mysql> desc bdetails;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| acc_no   | int(11)     | NO   | PRI | NULL    |       |
+| acc_type | varchar(50) | NO   |     | NULL    |       |
+| nom_name | varchar(20) | NO   |     | NULL    |       |
+| nom_rel  | varchar(10) | YES  |     | NULL    |       |  
+| nom_no   | varchar(20) | NO   |     | NULL    |       |
+| balance  | bigint(20)  | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+
+mysql> desc session;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| acc_no | int(11)     | NO   | PRI | NULL    |       |
+| pass   | varchar(10) | NO   |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> desc transaction;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| acc_no  | int(11)     | NO   |     | NULL    |       |
+| trans   | varchar(10) | NO   |     | NULL    |       |
+| t_amt   | int(11)     | NO   |     | NULL    |       |
+| balance | int(11)     | NO   |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc request;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| acc_no | int(11)     | NO   | PRI | NULL    |       |
+| pass   | varchar(10) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+
+create database bankdb;
+use bankdb;
+
+create table pdetails(id int primary key auto_increment,name varchar(30) not null,gender varchar(10),dob varchar(15), mob varchar(20) not null unique,email varchar(30),
+pass varchar(10) not null,state varchar(20),acc_no int(20) not null default 0);
+
+alter table pdetails auto_increment=1;
+
+create table bdetails(acc_no int primary key,acc_type varchar(50) not null,nom_name varchar(20) not null,nom_rel varchar(10),nom_no varchar(20) not null, balance bigint(20));
+
+create table transaction(acc_no int not null,trans varchar(10) not null,t_amt int not null,balance int not null);
+
+create table session(acc_no int primary key, pass varchar(10) not null);
+
+create table request(acc_no int primary key, pass varchar(10));
+
+
